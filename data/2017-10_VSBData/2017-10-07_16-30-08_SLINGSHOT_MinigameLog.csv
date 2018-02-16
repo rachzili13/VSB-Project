@@ -1,0 +1,4 @@
+0,START,minigame_1&isKioskConnected_1,109021
+4,ATTEMPT_START,,109021
+2,PROB_START,probNum_1&correctPosX_-1&correctPosY_-0.26&correctPosZ_8,109021
+1,END,score_0,109040.4

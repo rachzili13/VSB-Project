@@ -1,0 +1,8 @@
+0,START,minigame_1&isKioskConnected_1,7701.588
+4,ATTEMPT_START,,7701.588
+2,PROB_START,probNum_1&correctPosX_1&correctPosY_-0.26&correctPosZ_7,7701.588
+5,ATTEMPT_END,skele_72057594037931783,7764.6
+3,PROB_END,probNum_1,7764.6
+4,ATTEMPT_START,,7764.604
+2,PROB_START,probNum_2&correctPosX_-1&correctPosY_-0.26&correctPosZ_7,7764.604
+1,END,score_0,7767.561

@@ -4,6 +4,8 @@
 rm(list = ls()) 
 cat("\014") 
 
+setwd("/Users/Rachel/Documents/GitHub/VSB-Project")
+
 # Load libraries and settings
 library(dplyr)
 library(ggplot2)
@@ -28,8 +30,19 @@ var_names <- c("skeleID", "isMainSkeleton", "distFromControl", "time",
                "r_knee_x", "r_knee_y", "r_knee_z",
                "r_ankle_x", "r_ankle_y", "r_ankle_z", 
                "c_shoulder_x", "c_shoulder_y", "c_shoulder_z")
-file_names <- list.files(path = "data/2017-09-10_09-16_VSBData/", 
+
+file_skele <- list.files(path = paste0(getwd(), "/data", "/2017-10_VSBData"), 
                          pattern="*SkeleLog.csv")
+file_int <- list.files(path = paste0(getwd(), "/data", "/2017-10_VSBData"), 
+                                     pattern="*EventLog.csv")
+file_mini <- list.files(path = paste0(getwd(), "/data", "/2017-10_VSBData"), 
+                                     pattern="*MinigameLog.csv")
+
+data_skele <- lapply(file_skele, function(i){
+  pipe(paste0("awk 'BEGIN{i=0}{i++;if (i%4==0) print $1}" < file_skele[i]))
+})
+
+
 
 # Pull in data
 system.time(
