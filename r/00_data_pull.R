@@ -11,7 +11,8 @@ library(dplyr)
 library(ggplot2)
 options(scipen=999)
 
-# Needed variables
+# Assigning Variable Names #
+
 var_names <- c("skeleID", "isMainSkeleton", "distFromControl", "time", 
                "c_hips_x", "c_hips_y", "c_hips_z",
                "head_x", "head_y", "head_z",
@@ -31,23 +32,32 @@ var_names <- c("skeleID", "isMainSkeleton", "distFromControl", "time",
                "r_ankle_x", "r_ankle_y", "r_ankle_z", 
                "c_shoulder_x", "c_shoulder_y", "c_shoulder_z")
 
+# Creating lists for each of the types of data files #
+
+# Creating list of Skeleton Logs
 file_skele <- list.files(path = paste0(getwd(), "/data", "/2017-10_VSBData"), 
                          pattern="*SkeleLog.csv")
+
+# Creating list of Interaction Event Logs 
 file_int <- list.files(path = paste0(getwd(), "/data", "/2017-10_VSBData"), 
                                      pattern="*EventLog.csv")
+
+# Creating list of Minigame Logs
 file_mini <- list.files(path = paste0(getwd(), "/data", "/2017-10_VSBData"), 
                                      pattern="*MinigameLog.csv")
 
 data_skele <- lapply(file_skele, function(i){
   pipe(paste0("awk 'BEGIN{i=0}{i++;if (i%4==0) print $1}" < file_skele[i]))
-})
+  tryCatch(read.csv(paste0("data/2017-10_VSVData/", i), skip = 5, header = F), 
+           error = function(j){NULL})})
+}
 
 
 
 # Pull in data
 system.time(
 data <- lapply(file_names, function(i){
-  tryCatch(read.csv(paste0("data/2017-09-10_09-16_VSBData/", i), skip = 5, header = F), 
+  tryCatch(read.csv(paste0("data/2017-10_VSVData/", i), skip = 5, header = F), 
            error = function(j){NULL})}) %>%
   bind_rows(.) %>%
   setNames(., var_names)
